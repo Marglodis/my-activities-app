@@ -25,7 +25,7 @@ fun AppNavigation() {
         composable(AppScreen.Home.route) {
             HomeScreen(
                 viewModel = activityViewModel,
-                onAddActivity = {
+                onAddActivityClick = {
                     navController.navigate(AppScreen.AddActivity.route)
                 })
         }
