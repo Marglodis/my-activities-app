@@ -17,6 +17,9 @@ class ActivityViewModel : ViewModel() {
     //uiState es público e inmutable. La UI lo observa para reaccionar a los cambios.
     val uiState: StateFlow<ActivityUiState> = _uiState.asStateFlow()
 
+    private val _formState = MutableStateFlow(FormState())
+    val formState: StateFlow<FormState> = _formState.asStateFlow()
+
     fun addActivity(name: String, description: String, date: String, time: String) {
         // Usamos una corutina para no bloquea el hilo principal
         viewModelScope.launch {
@@ -42,5 +45,15 @@ class ActivityViewModel : ViewModel() {
         }
     }
 
+    fun clearForm() {
+        _formState.update { FormState() }
+    }
 
 }
+
+data class FormState(
+    val name: String = "",
+    val description: String = "",
+    val date: String = "",
+    val time: String = ""
+)
